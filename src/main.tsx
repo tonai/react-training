@@ -1,7 +1,9 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
+import App from "./components/App/App";
 
-const element = <div>Hello world</div>;
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <StrictMode>{element}</StrictMode>
+  <StrictMode>
+    <App />
+  </StrictMode>
 );

@@ -1,0 +1,11 @@
+.Article {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: lightblue;
+  cursor: pointer;
+}
+
+.isSelected {
+  background-color: aqua;
+}
