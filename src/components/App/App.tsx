@@ -2,13 +2,19 @@ import { useEffect, useState } from "react";
 import Article from "../Article/Article";
 import { ICategory } from "../../types/Category";
 import { useArticles } from "../../hooks/useArticles";
-import Filters, { FilterPublished } from "../Filters/Filters";
+import Filters, { FilterPublished, IFilters } from "../Filters/Filters";
 // import Resize from "../Resize/Resize";
 
 function App() {
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
-  const [published, setPublished] = useState("");
+  // const [title, setTitle] = useState("");
+  // const [category, setCategory] = useState("");
+  // const [published, setPublished] = useState("");
+  const [filters, setFilters] = useState<IFilters>({
+    title: "",
+    category: "",
+    published: "",
+  });
+  const { title, category, published } = filters;
 
   const articles = useArticles();
 
@@ -33,14 +39,7 @@ function App() {
 
   return (
     <div>
-      <Filters
-        title={title}
-        setTitle={setTitle}
-        category={category}
-        setCategory={setCategory}
-        published={published}
-        setPublished={setPublished}
-      />
+      <Filters filters={filters} setFilters={setFilters} />
       {filteredArticles.map((article) => (
         <Article key={article.id} article={article} categories={categories} />
       ))}

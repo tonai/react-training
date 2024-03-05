@@ -6,35 +6,33 @@ export enum FilterPublished {
   DRAFT = "draft",
 }
 
-interface IFiltersProps {
+export interface IFilters {
   title: string;
-  setTitle: Dispatch<SetStateAction<string>>;
   category: string;
-  setCategory: Dispatch<SetStateAction<string>>;
   published: string;
-  setPublished: Dispatch<SetStateAction<string>>;
+}
+
+interface IFiltersProps {
+  filters: IFilters;
+  setFilters: Dispatch<SetStateAction<IFilters>>;
 }
 
 function Filters(props: IFiltersProps) {
-  const { title, setTitle, category, setCategory, published, setPublished } =
-    props;
+  const { filters, setFilters } = props;
+  const { category, published, title } = filters;
 
-  function handleTitleChange(event: ChangeEvent<HTMLInputElement>) {
-    setTitle(event.target.value);
-  }
-
-  function handleCategoryChange(event: ChangeEvent<HTMLSelectElement>) {
-    setCategory(event.target.value);
-  }
-
-  function handlePublishedChange(event: ChangeEvent<HTMLInputElement>) {
-    setPublished(event.target.value);
+  function handleChange(
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) {
+    const clone = { ...filters };
+    clone[event.target.name as keyof IFilters] = event.target.value;
+    setFilters(clone);
   }
 
   return (
     <div>
-      <input value={title} onChange={handleTitleChange} />
-      <select value={category} onChange={handleCategoryChange}>
+      <input value={title} onChange={handleChange} name="title" />
+      <select value={category} onChange={handleChange} name="category">
         <option value=""></option>
         <option value="1">News</option>
         <option value="2">Blog post</option>
@@ -46,7 +44,7 @@ function Filters(props: IFiltersProps) {
           name="published"
           value={FilterPublished.ALL}
           checked={published === FilterPublished.ALL}
-          onChange={handlePublishedChange}
+          onChange={handleChange}
         />
       </label>
       <label>
@@ -56,7 +54,7 @@ function Filters(props: IFiltersProps) {
           name="published"
           value={FilterPublished.PUBLISHED}
           checked={published === FilterPublished.PUBLISHED}
-          onChange={handlePublishedChange}
+          onChange={handleChange}
         />
       </label>
       <label>
@@ -66,7 +64,7 @@ function Filters(props: IFiltersProps) {
           name="published"
           value={FilterPublished.DRAFT}
           checked={published === FilterPublished.DRAFT}
-          onChange={handlePublishedChange}
+          onChange={handleChange}
         />
       </label>
     </div>
