@@ -5,3 +5,10 @@ export interface IArticle {
   published: boolean;
   content: string;
 }
+
+export interface IArticleCreate {
+  title: string;
+  category: string;
+  published?: boolean;
+  content?: string;
+}

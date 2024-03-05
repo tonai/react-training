@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Article from "../Article/Article";
 import { ICategory } from "../../types/Category";
 import { useArticles } from "../../hooks/useArticles";
@@ -6,24 +6,20 @@ import Filters, { FilterPublished, IFilters } from "../Filters/Filters";
 import Container from "../Container/Container";
 // import Resize from "../Resize/Resize";
 
-const apiUrl = "http://localhost:3001/categories";
+interface IArticlesPageProps {
+  categories: ICategory[];
+}
 
-function ArticlesPage() {
+function ArticlesPage(props: IArticlesPageProps) {
+  const { categories } = props;
   const [filters, setFilters] = useState<IFilters>({
-    title: "fdfsdf",
+    title: "",
     category: "",
     published: "",
   });
   const { title, category, published } = filters;
 
   const articles = useArticles();
-
-  const [categories, setCategories] = useState<ICategory[]>([]);
-  useEffect(() => {
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((json) => setCategories(json));
-  }, []);
 
   const filteredArticles = articles
     .filter((article) => article.title.includes(title))
