@@ -1,4 +1,11 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+} from "react";
+import { ICategory } from "../../types/Category";
 
 export enum FilterPublished {
   ALL = "",
@@ -13,29 +20,48 @@ export interface IFilters {
 }
 
 interface IFiltersProps {
+  categories: ICategory[];
   filters: IFilters;
   setFilters: Dispatch<SetStateAction<IFilters>>;
 }
 
 function Filters(props: IFiltersProps) {
-  const { filters, setFilters } = props;
+  const { categories, filters, setFilters } = props;
   const { category, published, title } = filters;
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  function handleChange(
-    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) {
-    const clone = { ...filters };
-    clone[event.target.name as keyof IFilters] = event.target.value;
-    setFilters(clone);
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
+  // function handleChange(
+  //   event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  // ) {
+  //   setFilters({
+  //     ...filters,
+  //     [event.target.name as keyof IFilters]: event.target.value,
+  //   });
+  // }
+
+  function handleChange(name: keyof IFilters) {
+    return (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+      setFilters({
+        ...filters,
+        [name]: event.target.value,
+      });
+    };
   }
 
   return (
     <div>
-      <input value={title} onChange={handleChange} name="title" />
-      <select value={category} onChange={handleChange} name="category">
+      <input value={title} onChange={handleChange("title")} ref={inputRef} />
+      <select value={category} onChange={handleChange("category")}>
         <option value=""></option>
-        <option value="1">News</option>
-        <option value="2">Blog post</option>
+        {categories.map((category) => (
+          <option key={category.id} value={category.id}>
+            {category.title}
+          </option>
+        ))}
       </select>
       <label>
         All:{" "}
@@ -44,7 +70,7 @@ function Filters(props: IFiltersProps) {
           name="published"
           value={FilterPublished.ALL}
           checked={published === FilterPublished.ALL}
-          onChange={handleChange}
+          onChange={handleChange("published")}
         />
       </label>
       <label>
@@ -54,7 +80,7 @@ function Filters(props: IFiltersProps) {
           name="published"
           value={FilterPublished.PUBLISHED}
           checked={published === FilterPublished.PUBLISHED}
-          onChange={handleChange}
+          onChange={handleChange("published")}
         />
       </label>
       <label>
@@ -64,7 +90,7 @@ function Filters(props: IFiltersProps) {
           name="published"
           value={FilterPublished.DRAFT}
           checked={published === FilterPublished.DRAFT}
-          onChange={handleChange}
+          onChange={handleChange("published")}
         />
       </label>
     </div>
