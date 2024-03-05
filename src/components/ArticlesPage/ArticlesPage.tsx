@@ -4,6 +4,7 @@ import { ICategory } from "../../types/Category";
 import { useArticles } from "../../hooks/useArticles";
 import Filters, { FilterPublished, IFilters } from "../Filters/Filters";
 import Container from "../Container/Container";
+import { Link } from "react-router-dom";
 // import Resize from "../Resize/Resize";
 
 interface IArticlesPageProps {
@@ -35,7 +36,7 @@ function ArticlesPage(props: IArticlesPageProps) {
 
   return (
     <div>
-      <Container header="Container title">
+      <Container header={<Link to="/article">Create new article</Link>}>
         <Filters
           categories={categories}
           filters={filters}

@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import ArticlesPage from "../ArticlesPage/ArticlesPage";
 import ArticlePage from "../ArticlePage/ArticlePage";
 import { useEffect, useState } from "react";
@@ -14,13 +14,18 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<ArticlesPage categories={categories} />} />
-        <Route
-          path="/article"
-          element={<ArticlePage categories={categories} />}
-        />
-      </Routes>
+      <div>
+        <Link to="/">Home</Link>
+      </div>
+      <div>
+        <Routes>
+          <Route path="/" element={<ArticlesPage categories={categories} />} />
+          <Route
+            path="/article"
+            element={<ArticlePage categories={categories} />}
+          />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }
