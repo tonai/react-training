@@ -3,6 +3,7 @@ import classNames from "classnames";
 import { IArticle } from "../../types/Article";
 import "./Article.css";
 import { ICategory } from "../../types/Category";
+import { Link } from "react-router-dom";
 
 export interface IArticleProps {
   article: IArticle;
@@ -11,7 +12,7 @@ export interface IArticleProps {
 
 function Article(props: IArticleProps) {
   const { article, categories } = props;
-  const { category: categoryId, published, title } = article;
+  const { category: categoryId, id, published, title } = article;
   const [isSelected, setIsSelected] = useState(false);
   const category = categories.find((category) => category.id === categoryId);
 
@@ -27,6 +28,9 @@ function Article(props: IArticleProps) {
       <div>{title}</div>
       <div>{category?.title}</div>
       <div>{published ? "published" : "draft"}</div>
+      <div>
+        <Link to={`/article/${id}`}>Edit</Link>
+      </div>
     </div>
   );
 }

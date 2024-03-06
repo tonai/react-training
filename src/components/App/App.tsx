@@ -1,4 +1,4 @@
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
 import ArticlesPage from "../ArticlesPage/ArticlesPage";
 import ArticlePage from "../ArticlePage/ArticlePage";
 import { useEffect, useState } from "react";
@@ -24,6 +24,11 @@ function App() {
             path="/article"
             element={<ArticlePage categories={categories} />}
           />
+          <Route
+            path="/article/:id"
+            element={<ArticlePage categories={categories} />}
+          />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -1,6 +1,9 @@
-import { ChangeEvent, FormEvent, useState } from "react";
-import { addArticle } from "../../services/articles";
+import { useEffect, useState } from "react";
+import { addArticle, getArticle, updateArticle } from "../../services/articles";
 import { ICategory } from "../../types/Category";
+import { IArticle, IArticleCreate } from "../../types/Article";
+import { useNavigate, useParams } from "react-router-dom";
+import ArticleForm from "../ArticleForm/ArticleForm";
 
 interface IArticlePageProps {
   categories: ICategory[];
@@ -8,39 +11,42 @@ interface IArticlePageProps {
 
 function ArticlePage(props: IArticlePageProps) {
   const { categories } = props;
-  const [article, setArticle] = useState({
+  const [article, setArticle] = useState<IArticle | IArticleCreate>({
     title: "",
     category: "",
   });
-  const { title, category } = article;
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-  function handleChange(
-    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) {
+  useEffect(() => {
+    if (id) {
+      getArticle(id).then((article) => setArticle(article));
+    }
+  }, [id]);
+
+  function handleChange(name: string, value: string) {
     setArticle({
       ...article,
-      [event.target.name]: event.target.value,
+      [name]: value,
     });
   }
 
-  function handleSubmit(event: FormEvent) {
-    event.preventDefault();
-    addArticle(article);
+  async function handleSubmit() {
+    if (id) {
+      await updateArticle(article as IArticle);
+    } else {
+      await addArticle(article as IArticleCreate);
+    }
+    navigate("/");
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input value={title} onChange={handleChange} name="title" />
-      <select value={category} onChange={handleChange} name="category" required>
-        <option value=""></option>
-        {categories.map((category) => (
-          <option key={category.id} value={category.id}>
-            {category.title}
-          </option>
-        ))}
-      </select>
-      <input type="submit" />
-    </form>
+    <ArticleForm
+      categories={categories}
+      article={article}
+      onSubmit={handleSubmit}
+      onChange={handleChange}
+    />
   );
 }
 

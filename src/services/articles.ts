@@ -13,3 +13,17 @@ export function addArticle(article: IArticleCreate): Promise<IArticle> {
     method: "POST",
   }).then((data) => data.json());
 }
+
+export function getArticle(id: string) {
+  return fetch(`http://localhost:3001/articles/${id}`).then((data) =>
+    data.json()
+  );
+}
+
+export function updateArticle(article: IArticle) {
+  return fetch(`http://localhost:3001/articles/${article.id}`, {
+    body: JSON.stringify({ ...article, category: Number(article.category) }),
+    headers: { "Content-Type": "application/json" },
+    method: "PUT",
+  }).then((data) => data.json());
+}
