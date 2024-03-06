@@ -27,3 +27,9 @@ export function updateArticle(article: IArticle) {
     method: "PUT",
   }).then((data) => data.json());
 }
+
+export function removeArticle(id: number) {
+  return fetch(`http://localhost:3001/articles/${id}`, {
+    method: "DELETE",
+  }).then((data) => data.json());
+}

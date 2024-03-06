@@ -8,16 +8,21 @@ import { Link } from "react-router-dom";
 export interface IArticleProps {
   article: IArticle;
   categories: ICategory[];
+  onDelete: (id: number) => void;
 }
 
 function Article(props: IArticleProps) {
-  const { article, categories } = props;
+  const { article, categories, onDelete } = props;
   const { category: categoryId, id, published, title } = article;
   const [isSelected, setIsSelected] = useState(false);
   const category = categories.find((category) => category.id === categoryId);
 
   function handleClick() {
     setIsSelected(!isSelected);
+  }
+
+  function handleDelete() {
+    onDelete(id);
   }
 
   return (
@@ -30,6 +35,11 @@ function Article(props: IArticleProps) {
       <div>{published ? "published" : "draft"}</div>
       <div>
         <Link to={`/article/${id}`}>Edit</Link>
+      </div>
+      <div>
+        <button type="button" onClick={handleDelete}>
+          Delete
+        </button>
       </div>
     </div>
   );

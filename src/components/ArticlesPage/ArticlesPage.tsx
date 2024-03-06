@@ -5,6 +5,7 @@ import { useArticles } from "../../hooks/useArticles";
 import Filters, { FilterPublished, IFilters } from "../Filters/Filters";
 import Container from "../Container/Container";
 import { Link } from "react-router-dom";
+import { getArticles, removeArticle } from "../../services/articles";
 // import Resize from "../Resize/Resize";
 
 interface IArticlesPageProps {
@@ -20,7 +21,7 @@ function ArticlesPage(props: IArticlesPageProps) {
   });
   const { title, category, published } = filters;
 
-  const articles = useArticles();
+  const { articles, setArticles } = useArticles();
 
   const filteredArticles = articles
     .filter((article) => article.title.includes(title))
@@ -34,6 +35,15 @@ function ArticlesPage(props: IArticlesPageProps) {
         (published === FilterPublished.DRAFT && !article.published)
     );
 
+  async function handleDelete(id: number) {
+    setArticles((articles) => articles.filter((article) => article.id !== id));
+    try {
+      await removeArticle(id);
+    } catch (error) {
+      getArticles().then(setArticles);
+    }
+  }
+
   return (
     <div>
       <Container header={<Link to="/article">Create new article</Link>}>
@@ -43,7 +53,12 @@ function ArticlesPage(props: IArticlesPageProps) {
           setFilters={setFilters}
         />
         {filteredArticles.map((article) => (
-          <Article key={article.id} article={article} categories={categories} />
+          <Article
+            key={article.id}
+            article={article}
+            categories={categories}
+            onDelete={handleDelete}
+          />
         ))}
         {/* <button onClick={() => setCount(count + 1)}>{count}</button> */}
         {/* {count % 2 === 0 && <Resize />} */}
