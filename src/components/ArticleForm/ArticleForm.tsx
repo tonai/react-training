@@ -1,17 +1,17 @@
-import { ChangeEvent, FormEvent } from "react";
+import { ChangeEvent, FormEvent, useContext } from "react";
 import { Link } from "react-router-dom";
-import { ICategory } from "../../types/Category";
 import { IArticle, IArticleCreate } from "../../types/Article";
+import { categoriesContext } from "../../contexts/categories";
 
 interface IArticleFormProps {
   article: IArticleCreate | IArticle;
-  categories: ICategory[];
   onChange: (name: string, value: string) => void;
   onSubmit: () => void;
 }
 
 function ArticleForm(props: IArticleFormProps) {
-  const { article, categories, onChange, onSubmit } = props;
+  const { article, onChange, onSubmit } = props;
+  const categories = useContext(categoriesContext);
   const { title, category } = article;
 
   function handleChange(

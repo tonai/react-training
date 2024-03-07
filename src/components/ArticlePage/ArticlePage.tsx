@@ -1,16 +1,10 @@
 import { useEffect, useState } from "react";
 import { addArticle, getArticle, updateArticle } from "../../services/articles";
-import { ICategory } from "../../types/Category";
 import { IArticle, IArticleCreate } from "../../types/Article";
 import { useNavigate, useParams } from "react-router-dom";
 import ArticleForm from "../ArticleForm/ArticleForm";
 
-interface IArticlePageProps {
-  categories: ICategory[];
-}
-
-function ArticlePage(props: IArticlePageProps) {
-  const { categories } = props;
+function ArticlePage() {
   const [article, setArticle] = useState<IArticle | IArticleCreate>({
     title: "",
     category: "",
@@ -42,7 +36,6 @@ function ArticlePage(props: IArticlePageProps) {
 
   return (
     <ArticleForm
-      categories={categories}
       article={article}
       onSubmit={handleSubmit}
       onChange={handleChange}

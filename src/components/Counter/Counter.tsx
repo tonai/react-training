@@ -1,0 +1,236 @@
+import { ChangeEvent, useState, useTransition } from "react";
+
+function List(props: { count: number }) {
+  const { count } = props;
+  return new Array(+count).fill(null).map((_, i) => (
+    <div key={i}>
+      <div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <div>
+                  <div>
+                    <div>
+                      <div>
+                        <div>
+                          <div>
+                            <div>
+                              <div>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <div>
+                                        <div>
+                                          <div>
+                                            <div>
+                                              <div>
+                                                <div>
+                                                  <div>
+                                                    <div>
+                                                      <div>
+                                                        <div>
+                                                          <div>
+                                                            <div>
+                                                              <div>
+                                                                <div>
+                                                                  <div>
+                                                                    <div>
+                                                                      <div>
+                                                                        <div>
+                                                                          <div>
+                                                                            <div>
+                                                                              <div>
+                                                                                <div>
+                                                                                  <div>
+                                                                                    <div>
+                                                                                      <div>
+                                                                                        <div>
+                                                                                          <div>
+                                                                                            <div>
+                                                                                              <div>
+                                                                                                <div>
+                                                                                                  <div>
+                                                                                                    <div>
+                                                                                                      <div>
+                                                                                                        <div>
+                                                                                                          <div>
+                                                                                                            <div>
+                                                                                                              <div>
+                                                                                                                <div>
+                                                                                                                  <div>
+                                                                                                                    <div>
+                                                                                                                      <div>
+                                                                                                                        <div>
+                                                                                                                          <div>
+                                                                                                                            <div>
+                                                                                                                              <div>
+                                                                                                                                <div>
+                                                                                                                                  <div>
+                                                                                                                                    <div>
+                                                                                                                                      <div>
+                                                                                                                                        <div>
+                                                                                                                                          <div>
+                                                                                                                                            <div>
+                                                                                                                                              <div>
+                                                                                                                                                <div>
+                                                                                                                                                  <div>
+                                                                                                                                                    <div>
+                                                                                                                                                      <div>
+                                                                                                                                                        <div>
+                                                                                                                                                          <div>
+                                                                                                                                                            <div>
+                                                                                                                                                              <div>
+                                                                                                                                                                <div>
+                                                                                                                                                                  <div>
+                                                                                                                                                                    <div>
+                                                                                                                                                                      <div>
+                                                                                                                                                                        <div>
+                                                                                                                                                                          <div>
+                                                                                                                                                                            <div>
+                                                                                                                                                                              <div>
+                                                                                                                                                                                <div>
+                                                                                                                                                                                  <div>
+                                                                                                                                                                                    <div>
+                                                                                                                                                                                      <div>
+                                                                                                                                                                                        <div>
+                                                                                                                                                                                          <div>
+                                                                                                                                                                                            <div>
+                                                                                                                                                                                              <div>
+                                                                                                                                                                                                <div>
+                                                                                                                                                                                                  <div>
+                                                                                                                                                                                                    <div>
+                                                                                                                                                                                                      <div>
+                                                                                                                                                                                                        <div>
+                                                                                                                                                                                                          <div>
+                                                                                                                                                                                                            <div>
+                                                                                                                                                                                                              {
+                                                                                                                                                                                                                i
+                                                                                                                                                                                                              }
+                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                          </div>
+                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                      </div>
+                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                  </div>
+                                                                                                                                                                                                </div>
+                                                                                                                                                                                              </div>
+                                                                                                                                                                                            </div>
+                                                                                                                                                                                          </div>
+                                                                                                                                                                                        </div>
+                                                                                                                                                                                      </div>
+                                                                                                                                                                                    </div>
+                                                                                                                                                                                  </div>
+                                                                                                                                                                                </div>
+                                                                                                                                                                              </div>
+                                                                                                                                                                            </div>
+                                                                                                                                                                          </div>
+                                                                                                                                                                        </div>
+                                                                                                                                                                      </div>
+                                                                                                                                                                    </div>
+                                                                                                                                                                  </div>
+                                                                                                                                                                </div>
+                                                                                                                                                              </div>
+                                                                                                                                                            </div>
+                                                                                                                                                          </div>
+                                                                                                                                                        </div>
+                                                                                                                                                      </div>
+                                                                                                                                                    </div>
+                                                                                                                                                  </div>
+                                                                                                                                                </div>
+                                                                                                                                              </div>
+                                                                                                                                            </div>
+                                                                                                                                          </div>
+                                                                                                                                        </div>
+                                                                                                                                      </div>
+                                                                                                                                    </div>
+                                                                                                                                  </div>
+                                                                                                                                </div>
+                                                                                                                              </div>
+                                                                                                                            </div>
+                                                                                                                          </div>
+                                                                                                                        </div>
+                                                                                                                      </div>
+                                                                                                                    </div>
+                                                                                                                  </div>
+                                                                                                                </div>
+                                                                                                              </div>
+                                                                                                            </div>
+                                                                                                          </div>
+                                                                                                        </div>
+                                                                                                      </div>
+                                                                                                    </div>
+                                                                                                  </div>
+                                                                                                </div>
+                                                                                              </div>
+                                                                                            </div>
+                                                                                          </div>
+                                                                                        </div>
+                                                                                      </div>
+                                                                                    </div>
+                                                                                  </div>
+                                                                                </div>
+                                                                              </div>
+                                                                            </div>
+                                                                          </div>
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  ));
+}
+
+function Counter() {
+  const [isPending, startTransition] = useTransition();
+  const [value, setValue] = useState(0);
+  const [count, setCount] = useState(0);
+
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    const { value } = event.target;
+    setValue(Number(value));
+    startTransition(() => {
+      setCount(Number(value));
+    });
+  }
+
+  return (
+    <div>
+      <input type="range" onChange={handleChange} value={value} />
+      {/* <List count={value} /> */}
+      {isPending ? <div>Loading...</div> : <List count={count} />}
+    </div>
+  );
+}
+
+export default Counter;

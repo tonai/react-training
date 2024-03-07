@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import "./Container.css";
+import css from "./Container.module.scss";
 
 interface IContainerProps {
   children: ReactNode;
@@ -9,7 +9,7 @@ interface IContainerProps {
 function Container(props: IContainerProps) {
   const { children, header } = props;
   return (
-    <div className="Container">
+    <div className={css["Container"]}>
       <div>{header}</div>
       <div>{children}</div>
     </div>

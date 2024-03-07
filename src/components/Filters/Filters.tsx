@@ -2,10 +2,11 @@ import {
   ChangeEvent,
   Dispatch,
   SetStateAction,
+  useContext,
   useEffect,
   useRef,
 } from "react";
-import { ICategory } from "../../types/Category";
+import { categoriesContext } from "../../contexts/categories";
 
 export enum FilterPublished {
   ALL = "",
@@ -20,13 +21,13 @@ export interface IFilters {
 }
 
 interface IFiltersProps {
-  categories: ICategory[];
   filters: IFilters;
   setFilters: Dispatch<SetStateAction<IFilters>>;
 }
 
 function Filters(props: IFiltersProps) {
-  const { categories, filters, setFilters } = props;
+  const { filters, setFilters } = props;
+  const categories = useContext(categoriesContext);
   const { category, published, title } = filters;
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -53,7 +54,7 @@ function Filters(props: IFiltersProps) {
   }
 
   return (
-    <div>
+    <>
       <input value={title} onChange={handleChange("title")} ref={inputRef} />
       <select value={category} onChange={handleChange("category")}>
         <option value=""></option>
@@ -93,7 +94,7 @@ function Filters(props: IFiltersProps) {
           onChange={handleChange("published")}
         />
       </label>
-    </div>
+    </>
   );
 }
 
