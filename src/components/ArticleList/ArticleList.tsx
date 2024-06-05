@@ -1,34 +1,21 @@
+import { useState } from "react";
 import Article from "../Article/Article";
+import Resize from "../Resize/Resize";
+import { useArticles } from "../../hooks/useArticles";
+import Filters from "../Filters/Filters";
 
 function ArticleList() {
-  const articles = [
-    {
-      id: 1,
-      title: "Article 1",
-      category: "blog",
-      published: true,
-      content: "Lorem ipsum",
-    },
-    {
-      id: 2,
-      title: "Article 2",
-      category: "news",
-      published: true,
-      content: "Lorem ipsum",
-    },
-    {
-      id: 3,
-      title: "Article 3",
-      category: "blog",
-      published: false,
-      content: "Lorem ipsum",
-    },
-  ];
+  const articles = useArticles();
+  const [count, setCount] = useState(0);
+
   return (
     <div>
+      <Filters />
       {articles.map((art) => (
         <Article key={art.id} article={art} />
       ))}
+      <button onClick={() => setCount(count + 1)}>{count}</button>
+      {count % 2 === 0 ? <Resize /> : null}
     </div>
   );
 }

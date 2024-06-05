@@ -1,12 +1,7 @@
+import { useState } from "react";
+import classNames from "classnames";
+import { IArticle } from "../../types";
 import "./styles.css";
-
-interface IArticle {
-  id: number;
-  title: string;
-  category: string;
-  published: boolean;
-  content: string;
-}
 
 interface IArticleProps {
   article: IArticle;
@@ -14,8 +9,18 @@ interface IArticleProps {
 
 function Article(props: IArticleProps) {
   const { article } = props;
+  const [selected, setSelected] = useState(false);
+
+  function handleClick() {
+    setSelected(!selected);
+    // setSelected((selected) => !selected);
+  }
+
   return (
-    <div className="article">
+    <div
+      className={classNames("article", { "is-selected": selected })}
+      onClick={handleClick}
+    >
       <div>{article.title}</div>
       <div>{article.category}</div>
       <div>{article.published ? "published" : "draft"}</div>
