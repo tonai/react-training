@@ -1,15 +1,17 @@
 import { useState } from "react";
 import classNames from "classnames";
-import { IArticle } from "../../types";
+import { IArticle, ICategory } from "../../types";
 import "./styles.css";
 
 interface IArticleProps {
   article: IArticle;
+  categories: ICategory[];
 }
 
 function Article(props: IArticleProps) {
-  const { article } = props;
+  const { article, categories } = props;
   const [selected, setSelected] = useState(false);
+  const category = categories.find((cat) => cat.id === article.category);
 
   function handleClick() {
     setSelected(!selected);
@@ -22,7 +24,7 @@ function Article(props: IArticleProps) {
       onClick={handleClick}
     >
       <div>{article.title}</div>
-      <div>{article.category}</div>
+      <div>{category?.title}</div>
       <div>{article.published ? "published" : "draft"}</div>
     </div>
   );
